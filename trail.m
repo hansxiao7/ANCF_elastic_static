@@ -8,7 +8,8 @@ F(params.n-2, 1) = -params.F;
 [e, ~] = init_cond(params);
 
 
-for j = 1:1000
+for j = 1:10000
+    j
     Qint = zeros(params.n, 1);
     QQ_gradient= zeros(params.n, params.n);
 
@@ -17,7 +18,8 @@ for j = 1:1000
         istart = 4*i-3;
         iend = 4*i + 4;
         eele = e(istart:iend, 1);
-        q = Q(params.A, params.E, params.I, L, eele);
+        %q = Q(params.A, params.E, params.I, L, eele);
+        q = Fint(eele, params.E, params.A, params.I, L);
         Qint(istart:iend, 1) = Qint(istart:iend,1) + q;
         QQ_gradient(istart:iend, istart:iend) = QQ_gradient(istart:iend, istart:iend) +  Q_gradient(params.A, params.E, params.I, L, eele);
     end
